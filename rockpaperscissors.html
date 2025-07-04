@@ -32,6 +32,7 @@ return "Scissors";
             // Normalize input (case-insensitive)
             humanChoice = humanChoice.trim().toLowerCase();
             computerChoice = computerChoice.toLowerCase();
+            
 
         
  
@@ -45,7 +46,7 @@ return "Scissors";
             (humanChoice === "paper" && computerChoice === "rock") ||
             (humanChoice  === "scissors" && computerChoice === "paper" )
 ){humanWins += 1;
-log.textContent = "You win"
+console.log (`You win! ${humanChoice.charAt(0).toUpperCase + humanChoice. slice(1)} beats ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)}`)
 winDisplay.textContent = "Wins:  " +humanWins}
 else if (
    humanChoice  === "rock" ||
@@ -53,7 +54,7 @@ else if (
    humanChoice  === "scissors"
 )
 { computerWins += 1;
-    log.textContent = "You lose"
+    console.log(`You lose ${computerChoice.charAt(0).toUpperCase + computerChoice. slice(1)} beats ${humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1)}`)
     lossDisplay.textContent = "Losses:  " +computerWins
 }          
 else {
