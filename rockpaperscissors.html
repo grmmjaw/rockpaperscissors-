@@ -8,48 +8,51 @@
 <body>
 <button class="signButton">Click Me</button>
 <pre id="log"></pre>
+<p id ="winDisplay">Win Count: </p> 
+<p id = "lossDisplay">COM Count:</p>
     <script>
+    let humanWins= 0;
+    let computerWins= 0; 
+
         function getComputerchoice(){
   let x = Math.floor (Math.random() * 3);
- 
   if (x === 1)
  return "Rock";
-
   else if (x < 1) 
 return "Paper";
-
 else 
-return "Scissors";
-
-}
+return "Scissors"; 
+        }
 const signButton = document.querySelector(".signButton");
 const log = document.querySelector("#log");
+const winDisplay = document.querySelector("#winDisplay");
+const  lossDisplay = document.querySelector("#lossDisplay")
+
 signButton.addEventListener("click", () => {
     let sign = prompt ("Rock, Paper, Scissors!");
     let Computerchoice = getComputerchoice();
-    
  if (sign === Computerchoice){
         log.textContent = "Its a tie!";
     }
     else if (
-    
             (sign === "Rock" && Computerchoice === "Scissors")||
             (sign === "Paper" && Computerchoice === "Rock") ||
             (sign === "Scissors" && Computerchoice === "Paper" )
-){
-log.textContent = "You win"}
-
+){humanWins += 1;
+log.textContent = "You win"
+winDisplay.textContent = "Wins:  " +humanWins}
 else if (
     sign === "Rock" ||
     sign === "Paper" ||
-    sign === "sicissors"
-
+    sign === "scissors"
 )
-{
+{ computerWins += 1;
     log.textContent = "You lose"
-}
-            
+    lossDisplay.textContent = "Losses:  " +computerWins
+
+}          
     else {log.textContent = "You lose"}
+
 
 });
     </script>
@@ -57,3 +60,4 @@ else if (
 </body>
 </html>
 
+        
