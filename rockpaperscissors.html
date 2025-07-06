@@ -10,15 +10,20 @@
 <pre id="log"></pre>
 <p id ="winDisplay">Win Count: </p> 
 <p id = "lossDisplay">COM Count:</p>
+<p id = "roundDisplay">Round Count</p>
     <script>
     let humanWins= 0;
     let computerWins= 0; 
+    let round = 0;
+
 
 const signButton = document.querySelector(".signButton");
 const log = document.querySelector("#log");
 const winDisplay = document.querySelector("#winDisplay");
 const lossDisplay = document.querySelector("#lossDisplay");
+const roundDisplay = document.querySelector("#roundDisplay");
         
+
 function getComputerchoice(){
   let x = Math.floor (Math.random() * 3);
   if (x === 1)
@@ -28,13 +33,10 @@ return "Paper";
 else 
 return "Scissors"; 
         }
+
         function playRound(humanChoice, computerChoice) {
-            // Normalize input (case-insensitive)
             humanChoice = humanChoice.trim().toLowerCase();
             computerChoice = computerChoice.toLowerCase();
-            
-
-        
  
     if (humanChoice === computerChoice){
         log.textContent = "Its a tie!"
@@ -44,9 +46,9 @@ return "Scissors";
     if (
             (humanChoice === "rock" && computerChoice === "scissors")||
             (humanChoice === "paper" && computerChoice === "rock") ||
-            (humanChoice  === "scissors" && computerChoice === "paper" )
+            (humanChoice  === "scissors" && computerChoice === "paper")
 ){humanWins += 1;
-console.log (`You win! ${humanChoice.charAt(0).toUpperCase + humanChoice. slice(1)} beats ${computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)}`)
+log.textContent = "You win"
 winDisplay.textContent = "Wins:  " +humanWins}
 else if (
    humanChoice  === "rock" ||
@@ -54,14 +56,21 @@ else if (
    humanChoice  === "scissors"
 )
 { computerWins += 1;
-    console.log(`You lose ${computerChoice.charAt(0).toUpperCase + computerChoice. slice(1)} beats ${humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1)}`)
+    log.textContent = "You lose"
     lossDisplay.textContent = "Losses:  " +computerWins
 }          
 else {
     log.textContent = "Invalid Input";
 }
-} // <-- This closes the playRound function
 
+if (humanWins === 5){
+    log.textContent = "You win the round"
+    roundDisplay.textContent = "Rounds won:  "+ 1
+};
+if (computerWins === 5){
+    log.textContent = "Computer win the round"
+    roundDisplay.textContent = "Computer Rounds won:  "+1
+};} // <-- This closes the playRound function
 signButton.addEventListener("click", () => {
     let humanChoice = prompt("Rock, Paper, Scissors!");
     let computerChoice = getComputerchoice();
