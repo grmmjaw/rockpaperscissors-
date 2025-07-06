@@ -8,12 +8,16 @@
 <body>
 <button class="signButton">Click Me</button>
 <pre id="log"></pre>
-<p id ="winDisplay">Win Count: </p> 
-<p id = "lossDisplay">COM Count:</p>
-<p id = "roundDisplay">Round Count</p>
+<p id ="winDisplay">Your Score: </p> 
+<p id = "lossDisplay">COM Score:</p>
+<p id = "roundDisplay">Round Count:</p>
+<p id = "playgameDisplay">Game Winner:</p>
+
     <script>
     let humanWins= 0;
     let computerWins= 0; 
+    let playersRoundswon = 0;
+    let computersRoundswon = 0;
     let round = 0;
 
 
@@ -22,7 +26,7 @@ const log = document.querySelector("#log");
 const winDisplay = document.querySelector("#winDisplay");
 const lossDisplay = document.querySelector("#lossDisplay");
 const roundDisplay = document.querySelector("#roundDisplay");
-        
+const playgameDisplay = document.querySelector("#playgameDisplay");
 
 function getComputerchoice(){
   let x = Math.floor (Math.random() * 3);
@@ -33,7 +37,8 @@ return "Paper";
 else 
 return "Scissors"; 
         }
-
+        
+     function playGame (){
         function playRound(humanChoice, computerChoice) {
             humanChoice = humanChoice.trim().toLowerCase();
             computerChoice = computerChoice.toLowerCase();
@@ -49,7 +54,7 @@ return "Scissors";
             (humanChoice  === "scissors" && computerChoice === "paper")
 ){humanWins += 1;
 log.textContent = "You win"
-winDisplay.textContent = "Wins:  " +humanWins}
+winDisplay.textContent = "Your Score:  " +humanWins}
 else if (
    humanChoice  === "rock" ||
    humanChoice  === "paper" ||
@@ -57,28 +62,61 @@ else if (
 )
 { computerWins += 1;
     log.textContent = "You lose"
-    lossDisplay.textContent = "Losses:  " +computerWins
+    lossDisplay.textContent = "COM Score:  " +computerWins
 }          
 else {
     log.textContent = "Invalid Input";
 }
 
 if (humanWins === 5){
-    log.textContent = "You win the round"
-    roundDisplay.textContent = "Rounds won:  "+ 1
+    log.textContent = "You win the round";
+    round += 1;
+    playersRoundswon += 1
+    roundDisplay.textContent = "Round:  "+ round
+    humanWins = 0;
+    computerWins = 0;
+    winDisplay.textContent = "Your score: 0" ; 
+    lossDisplay.textContent = "COM score: 0"; 
 };
 if (computerWins === 5){
-    log.textContent = "Computer win the round"
-    roundDisplay.textContent = "Computer Rounds won:  "+1
-};} // <-- This closes the playRound function
+    log.textContent = "Computer wins the round";
+    round += 1
+    computersRoundswon += 1
+    roundDisplay.textContent = "Round:  "+ round;
+    humanWins = 0;
+    computerWins = 0; 
+    winDisplay.textContent = "Your score: 0"; 
+    lossDisplay.textContent = "COM score: 0"; 
+}
+ 
+}
 signButton.addEventListener("click", () => {
+if (playersRoundswon === 3 || computersRoundswon === 3) {
+    alert("Game over! Refresh the page to play again.")
+    return;
+}
+
+// <-- This closes the playRound function
+
     let humanChoice = prompt("Rock, Paper, Scissors!");
+     if (humanChoice === null) return; 
     let computerChoice = getComputerchoice();
     playRound(humanChoice, computerChoice);
+    if (playersRoundswon === 3){
+    playgameDisplay.textContent = "You win"
+ }
+ else if (computersRoundswon === 3) {
+    playgameDisplay.textContent = "COM wins"
+ }
+ 
+
 });
+}
+
+playGame();
+
     </script>
     
 </body>
 </html>
 
-        
